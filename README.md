@@ -10,6 +10,16 @@ Also included is a similar PhantomJS script (`svg-to-png.js`) that creates a num
 
 I wanted to use LibreOffice Impress to generate animated text and diagrams for use in videos. Impress can export animated SVG but my video editor of choice, Blender VSE, only imports raster video formats.
 
+## Dependencies
+
+* PhantomJS
+* FFmpeg
+
+You can get them on Debian-based systems like Ubuntu with:
+```
+sudo apt install phantomjs ffmpeg
+```
+
 "Inspired" by:
 * This [StackOverflow question](https://stackoverflow.com/questions/19759138/error-using-ffmpeg-image2pipe-with-phantomjs-to-render-video-from-webpage-screen)
 * [Recording a website with PhantomJS and FFmpeg](https://mindthecode.com/recording-a-website-with-phantomjs-and-ffmpeg/)
