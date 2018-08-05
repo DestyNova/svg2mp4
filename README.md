@@ -14,6 +14,8 @@ I wanted to use LibreOffice Impress to generate animated text and diagrams for u
 * This [StackOverflow question](https://stackoverflow.com/questions/19759138/error-using-ffmpeg-image2pipe-with-phantomjs-to-render-video-from-webpage-screen)
 * [Recording a website with PhantomJS and FFmpeg](https://mindthecode.com/recording-a-website-with-phantomjs-and-ffmpeg/)
 
+## License
+zlib
 ___
 ## TODO
 
