@@ -8,7 +8,8 @@ usage() {
     -w <WIDTH>: Horizontal resolution
     -h <HEIGHT>: Vertical resolution
     -f <FPS>: Output FPS
-    -t <TIME>: Maximum file duration in seconds" 1>&2
+    -t <TIME>: Maximum file duration in seconds
+    -o <FILENAME>: Output file" 1>&2
   exit 1
 }
 
@@ -18,8 +19,9 @@ TIME=2
 RES_X=1280
 RES_Y=720
 JS_PATH=`dirname $0`/svg-to-mp4.js
+OUT_FILE=out.mp4
 
-while getopts ":w:h:f:t:" opt; do
+while getopts ":w:h:f:t:o:" opt; do
   case $opt in
     w)
       RES_X=$OPTARG
@@ -32,6 +34,9 @@ while getopts ":w:h:f:t:" opt; do
       ;;
     t)
       TIME=$OPTARG
+      ;;
+    o)
+      OUT_FILE=$OPTARG
       ;;
     \?)
       echo "Invalid option: -$OPTARG" >&2
@@ -51,7 +56,6 @@ fi
 
 IN_FILE=$1
 IN_PATH="file://`pwd`/$IN_FILE"
-OUT_FILE=${2:-"out.mp4"}
 
 if [ ! -e $IN_FILE ]; then
   echo "ERROR: Can't find input file \"$IN_FILE\"" >&2
