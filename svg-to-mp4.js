@@ -6,12 +6,15 @@ var system = require('system'),
     frames = time * fps,
     width = args.length > 4 ? parseInt(args[4]) : 1280,
     height = args.length > 5 ? parseInt(args[5]) : 720,
+    slowdownFactor = args.length > 6 ? parseInt(args[6]) : 10,
     page = require("webpage").create();
 
 page.viewportSize = { width: width, height: height };
 
-var frame = 0;
-// start capturing frames early to avoid missing any
+var frame = 0,
+    trueFps = fps / slowdownFactor,
+    timingInterval = 1000 / trueFps;
+
 setInterval(function() {
   if(frame >= frames)
     phantom.exit();
@@ -19,7 +22,7 @@ setInterval(function() {
     console.log("Writing frame " + frame++);
     page.render("/dev/stderr", { format: "png" });
   }
-}, fps);
+}, timingInterval);
 
 page.open(svgPath, function start(status) {
   console.log("Opened SVG");

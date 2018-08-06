@@ -14,6 +14,7 @@ I wanted to use LibreOffice Impress to generate animated text and diagrams for u
 
 * PhantomJS
 * FFmpeg
+* Perl
 
 You can get them on Debian-based systems like Ubuntu with:
 ```
