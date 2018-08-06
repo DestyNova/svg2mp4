@@ -23,7 +23,7 @@ SLOWDOWN=20
 JS_PATH=`dirname $0`/svg-to-mp4.js
 OUT_FILE=out.mp4
 
-while getopts ":w:h:f:t:o:" opt; do
+while getopts ":w:h:f:t:o:s:" opt; do
   case $opt in
     w)
       RES_X=$OPTARG
@@ -39,6 +39,9 @@ while getopts ":w:h:f:t:o:" opt; do
       ;;
     o)
       OUT_FILE=$OPTARG
+      ;;
+    s)
+      SLOWDOWN=$OPTARG
       ;;
     \?)
       echo "Invalid option: -$OPTARG" >&2
@@ -75,7 +78,7 @@ IN_PATH="file://$TMP_PATH"
 echo $TMP_PATH
 
 # Note: swapping stdout / stderr to work around ne'er-to-be-fixed PhantomJS bug
-(phantomjs $JS_PATH $IN_PATH $TIME $FPS $RES_X $RES_Y $SLOWDOWN 3>&2 2>&1 1>&3-) | ffmpeg -y -c:v png -f image2pipe -framerate $FPS -t $TIME -i - -c:v libx264 -pix_fmt yuv420p -vf scale=$RES_X:$RES_Y -r $FPS $OUT_FILE
+(phantomjs $JS_PATH $IN_PATH $TIME $FPS $RES_X $RES_Y $SLOWDOWN 3>&2 2>&1 1>&3-) | ffmpeg -y -c:v png -f image2pipe -framerate $FPS -t $TIME -i - -c:v libx264 -pix_fmt yuv420p -preset slow -vf scale=$RES_X:$RES_Y -r $FPS $OUT_FILE
 
 # Cleanup
 rm $TMP_PATH
